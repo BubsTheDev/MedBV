@@ -1,10 +1,14 @@
 function [ C ] = ourCov( D )
-%ORCOV Summary of this function goes here
-%   D .... Matrix (2x50)
+% Calculates covariance of a dim dimensional matrix
+%   D .... Matrix (dim x n)
 %   C .... calculated covariance matrix
     n = length(D);
-    meanVec = [mean(D(1,:)) mean(D(2,:))]';
-    C = zeros(2);
+    meanVec = zeros(1,size(D,1));
+    for i = 1:size(D,1)
+        meanVec(i) = mean(D(i,:));
+    end
+    meanVec = meanVec';
+    C = zeros(size(D,1));
     for i = 1:n 
         C = C + (D(:,i) - meanVec) * (D(:,i) - meanVec)';     
     end
