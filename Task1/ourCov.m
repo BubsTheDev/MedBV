@@ -16,5 +16,8 @@ function [ C ] = ourCov( D )
     C = C/(n-1);
     
     %% TODO: PLOT
+   % figure;
+   % plot(C);
+   % axis equal;
 end
 
