@@ -14,5 +14,7 @@ function [ C ] = ourCov( D )
     end
     
     C = C/(n-1);
+    
+    %% TODO: PLOT
 end
 
