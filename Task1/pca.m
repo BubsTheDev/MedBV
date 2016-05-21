@@ -23,12 +23,12 @@ eigenvec = vec_sorted;
 result = eigenvec' * D;
 
 %plot PCA
-if D(1) == 2
-%plot2DPCA(D, meanVec, result, eigenvec, eigenval, 1, 1); % n x d or d x n?
-elseif D(1) == 3
-%plot3DPCA(D, meanVec, eigenvec, diag(eigenval), 1, 1)
+if size(D,1) == 2
+    plot2DPCA(D', meanVec, result', eigenvec, eigenval, 1, 1);
+elseif size(D,1) == 3
+   % plot3DPCA(D', meanVec, eigenvec, eigenval, 1, 1)
 else
-% do nothing  
+    fprintf('No plotting for this matrix dimension available.'); 
 end
 
 end
