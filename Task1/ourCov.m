@@ -2,7 +2,8 @@ function [ C ] = ourCov( D )
 % Calculates covariance of a dim dimensional matrix
 %   D .... Matrix (dim x n)
 %   C .... calculated covariance matrix
-    n = length(D);
+
+    n = size(D,2);
     meanVec = zeros(1,size(D,1));
     for i = 1:size(D,1)
         meanVec(i) = mean(D(i,:));
@@ -13,11 +14,11 @@ function [ C ] = ourCov( D )
         C = C + (D(:,i) - meanVec) * (D(:,i) - meanVec)';     
     end
     
-    C = C/(n-1);
+    C = C /(n-1);
     
     %% TODO: PLOT
-   % figure;
-   % plot(C);
-   % axis equal;
+%    figure;
+%    plot(D(:,1), D(:,2));
+%    axis equal;
 end
 
