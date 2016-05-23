@@ -24,13 +24,13 @@ eigenValues = cell(1, numElems);
 eigenVectors = cell(1, numElems);
 meanVectors = cell(1, numElems);
 for i=1:numElems
-    [eigenValues{i}, eigenVectors{i}] = pca(covMatrices{i});
+    [eigenValues{i}, eigenVectors{i}] = pca(daten{i});
     meanVectors{i} = mean(daten{i},2);
     meanMatrix = repmat(meanVectors{i},1,size(daten{i},2),1);
     
     %plot
-    projection = eigenVectors{i}' * (daten{i} - meanMatrix);
-    reconstruction = projection' * eigenVectors{i} + meanMatrix';
+    projection = (daten{i} - meanMatrix)' * eigenVectors{i};
+    reconstruction = projection * eigenVectors{i} + meanMatrix';
     plot2DPCA(daten{i}', meanVectors{i}', reconstruction, eigenVectors{i}, eigenValues{i}, 1, 1);
 end
 
