@@ -89,7 +89,7 @@ shapes = shapes{1};
 for i=1:size(shapes,3)
     [eigenVal, eigenVec] = pca(shapes(:,:,i));
     meanVec = mean(shapes(:,:,i),2);
-    meanMatrix = repmat(meanVec,1,size(shapes(:,:,i),2),1);
+    meanMatrix = repmat(meanVec,[1 size(shapes(:,:,i),2) 1]);
     projection = (shapes(:,:,i) - meanMatrix)' * eigenVec;
     reconstruction = projection * eigenVec' + meanMatrix';
 end
