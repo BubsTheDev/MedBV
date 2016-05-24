@@ -81,15 +81,16 @@ meanMatrix = repmat(meanVec,[1 size(data3D,2) 1]);
 eigenVector = eigenVec(:,1:2);
 projection = (data3D - meanMatrix)' * eigenVector; % dimension: nx2
 reconstruction = projection * eigenVector' + meanMatrix'; % dimension: nx3
-plot3DPCA(reconstruction, meanVec', eigenVec, eigenVal, 1, 1);
+%plot3DPCA(reconstruction, meanVec', eigenVec, eigenVal, 1, 1);
 
 %% 5 Shape Modell
 shapes = shapes{1};
-% 5.a PCA der Shape Daten
-for i=1:size(shapes,3)
-    [eigenVal, eigenVec] = pca(shapes(:,:,i));
-    meanVec = mean(shapes(:,:,i),2);
-    meanMatrix = repmat(meanVec,[1 size(shapes(:,:,i),2) 1]);
-    projection = (shapes(:,:,i) - meanMatrix)' * eigenVec;
-    reconstruction = projection * eigenVec' + meanMatrix';
-end
+%5.a PCA der Shape Daten
+% for i=1:size(shapes,3)
+%     [eigenVal, eigenVec] = pca(shapes(:,:,i));
+%     meanVec = mean(shapes(:,:,i),2);
+%     meanMatrix = repmat(meanVec,[1 size(shapes(:,:,i),2) 1]);
+%     projection = (shapes(:,:,i) - meanMatrix)' * eigenVec;
+%     reconstruction = projection * eigenVec' + meanMatrix';
+% end
+Bsp5(shapes);
