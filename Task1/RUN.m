@@ -60,6 +60,11 @@ meanMatrix = repmat(meanVectors{3},[1 size(daten{3},2) 1]);
 eigenVector = eigenVectors{3};
 eigenVector = eigenVector(:,2); % side vector = eigenvector with smallest eigenvalue
 projection = (daten{3} - meanMatrix)' * eigenVector; % dimension: nx1
+
+figure;
+plot(projection(:,1),'bo'); %Plot 1D projection data
+title('Projection 3b');
+
 reconstruction = projection * eigenVector' + meanMatrix'; % dimension: nx2
 plot2DPCA(daten{3}', meanVectors{3}', reconstruction, eigenVectors{3}, eigenValues{3}, 1, 1);
 
@@ -74,14 +79,19 @@ fprintf('Nebenvektor durchschnittlicher Fehler: %.10f%% \n', meanAbsError);
 data3D = daten3d{1};
 [eigenVal, eigenVec] = pca(data3D);
 meanVec = mean(data3D,2);
-plot3DPCA(data3D', meanVec', eigenVec, eigenVal, 1, 1);
+plot3DPCA(data3D', meanVec', eigenVec, eigenVal, 1, 0); %Plot data without reconstruction
 
 % 4.b
 meanMatrix = repmat(meanVec,[1 size(data3D,2) 1]);
 eigenVector = eigenVec(:,1:2);
 projection = (data3D - meanMatrix)' * eigenVector; % dimension: nx2
+
+figure;
+plot(projection(:,1),projection(:,2),'bo'); %Plot 2D projection data
+title('Projection 4b');
+
 reconstruction = projection * eigenVector' + meanMatrix'; % dimension: nx3
-%plot3DPCA(reconstruction, meanVec', eigenVec, eigenVal, 1, 1);
+plot3DPCA(data3D', meanVec', eigenVec, eigenVal, 1, 1); %Plot data with reconstruction flag
 
 %% 5 Shape Modell
 shapes = shapes{1};
