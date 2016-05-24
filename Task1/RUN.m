@@ -5,20 +5,19 @@ daten = struct2cell(load('daten.mat'));
 daten3d = struct2cell(load('daten3d.mat'));
 shapes = struct2cell(load('shapes.mat'));
 
-%% 1. Kovarianzmatrix 
+%% 1. Kovarianzmatrix
 % 1.b
 numElems = size(daten,1);
-covMatrices = cell(1, numElems);
 for i=1:numElems
     data = daten{i};
-    covMatrices{i} = ourCov(data);
+    covMatrix = ourCov(data);
     
     % plot
-    %    fprintf('Kovarianzmatrix data%d:\n',i);
-    %    disp(covMatrices{i});
-    %    figure;
-    %    plot(data(1,:), data(2,:));
-    %    axis equal;
+    fprintf('Kovarianzmatrix data%d:\n',i);
+    disp(covMatrix);
+    figure;
+    plot(data(1,:), data(2,:), 'bo');
+    axis equal;
 end
 
 %% PCA
@@ -29,7 +28,7 @@ meanVectors = cell(1, numElems);
 for i=1:numElems
     [eigenValues{i}, eigenVectors{i}] = pca(daten{i});
     meanVectors{i} = mean(daten{i},2);
-    meanMatrix = repmat(meanVectors{i},1,size(daten{i},2),1);
+    meanMatrix = repmat(meanVectors{i},[1 size(daten{i},2) 1]);
     
     %plot
     projection = (daten{i} - meanMatrix)' * eigenVectors{i};
@@ -44,11 +43,11 @@ plot2DPCA(daten{4}', meanVectors{4}', reconstruction, eigenVectors{4}, eigenValu
 
 %% 3 Unterraumprojektion
 % 3.a
-meanMatrix = repmat(meanVectors{3},1,size(daten{3},2),1);
+meanMatrix = repmat(meanVectors{3},[1 size(daten{3},2) 1]);
 eigenVector = eigenVectors{3};
 eigenVector = eigenVector(:,1); % main vector = eigenvector with biggest eigenvalue
 projection = (daten{3} - meanMatrix)' * eigenVector; % dimension: nx1
-reconstruction = projection * eigenVector' + meanMatrix'; % dimension: nx2 
+reconstruction = projection * eigenVector' + meanMatrix'; % dimension: nx2
 plot2DPCA(daten{3}', meanVectors{3}', reconstruction, eigenVectors{3}, eigenValues{3}, 1, 1);
 
 % error
@@ -57,11 +56,11 @@ meanAbsError = sum(sqrt(dot(diff, diff, 2))) / size(daten{3}', 1);
 fprintf('Hauptvektor durchschnittlicher Fehler: %.10f%% \n', meanAbsError);
 
 % 3.b
-meanMatrix = repmat(meanVectors{3},1,size(daten{3},2),1);
+meanMatrix = repmat(meanVectors{3},[1 size(daten{3},2) 1]);
 eigenVector = eigenVectors{3};
 eigenVector = eigenVector(:,2); % side vector = eigenvector with smallest eigenvalue
 projection = (daten{3} - meanMatrix)' * eigenVector; % dimension: nx1
-reconstruction = projection * eigenVector' + meanMatrix'; % dimension: nx2 
+reconstruction = projection * eigenVector' + meanMatrix'; % dimension: nx2
 plot2DPCA(daten{3}', meanVectors{3}', reconstruction, eigenVectors{3}, eigenValues{3}, 1, 1);
 
 % error
@@ -78,8 +77,18 @@ meanVec = mean(data3D,2);
 plot3DPCA(data3D', meanVec', eigenVec, eigenVal, 1, 1);
 
 % 4.b
-meanMatrix = repmat(meanVec,1,size(data3D,2),1);
+meanMatrix = repmat(meanVec,[1 size(data3D,2) 1]);
 eigenVector = eigenVec(:,1:2);
 projection = (data3D - meanMatrix)' * eigenVector; % dimension: nx2
-reconstruction = projection * eigenVector' + meanMatrix'; % dimension: nx3 
+reconstruction = projection * eigenVector' + meanMatrix'; % dimension: nx3
 plot3DPCA(reconstruction, meanVec', eigenVec, eigenVal, 1, 1);
+
+
+%% 5 Shapes
+shapeMatrix = shapes{1};
+numShapes = size(shapeMatrix,3);
+
+for i = 1:numShapes
+    %[~, eigenVectors{i}] = pca(shapeMatrix(:,:,i)');
+    generateShape(shapeMatrix(:,:,i));
+end
