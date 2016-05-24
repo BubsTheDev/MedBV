@@ -27,6 +27,8 @@ eigenVecs = vecs_sorted;
 % generate shapes
 for i = 1:depth
     b = eigenVecs' * (shapesConcat(:,i) - meanVec);
+    b(2:end) = 0;
+    
     x = generateShape(b, eigenVecs, meanVec);
     figure;
     plotShape(x, meanVec);
