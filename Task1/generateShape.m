@@ -7,4 +7,3 @@ result = meanVec + eigenVec * b;
 
 
 end
-

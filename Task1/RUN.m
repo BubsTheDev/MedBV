@@ -95,12 +95,4 @@ plot3DPCA(data3D', meanVec', eigenVec, eigenVal, 1, 1); %Plot data with reconstr
 
 %% 5 Shape Modell
 shapes = shapes{1};
-%5.a PCA der Shape Daten
-% for i=1:size(shapes,3)
-%     [eigenVal, eigenVec] = pca(shapes(:,:,i));
-%     meanVec = mean(shapes(:,:,i),2);
-%     meanMatrix = repmat(meanVec,[1 size(shapes(:,:,i),2) 1]);
-%     projection = (shapes(:,:,i) - meanMatrix)' * eigenVec;
-%     reconstruction = projection * eigenVec' + meanMatrix';
-% end
 Bsp5(shapes);
