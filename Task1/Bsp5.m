@@ -8,7 +8,6 @@ function Bsp5(shapes)
 % INPUT:
 % shapes ..... matrix containing data of different shapes, NxMxD
 
-% 5.a
 rows = size(shapes,1);
 cols = size(shapes,2);
 depth = size(shapes,3);

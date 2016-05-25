@@ -1,4 +1,3 @@
-% 5.b
 function plotShape( shape, meanShape, figureTitle)
 % Plots the generated shapes in blue and the mean shape in red
 %

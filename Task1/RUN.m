@@ -9,7 +9,7 @@ shapes = struct2cell(load('shapes.mat'));
 numElems = size(daten,1);
 for i=1:numElems
     data = daten{i};
-    covMatrix = ourCov(data); %1.a
+    covMatrix = ourCov(data);
     
     % plot
     fprintf('Kovarianzmatrix data%d:\n',i);
