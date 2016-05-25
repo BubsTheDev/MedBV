@@ -1,5 +1,6 @@
+% 1.a
 function [ C ] = ourCov( D )
-% Calculates covariance of a dim dimensional matrix
+% Calculates covariance matrix of a dim dimensional matrix
 %   D .... Matrix (dim x n)
 %   C .... calculated covariance matrix
 
