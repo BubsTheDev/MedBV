@@ -1,4 +1,3 @@
-clear;
 close all
 
 daten = struct2cell(load('daten.mat'));
@@ -17,6 +16,7 @@ for i=1:numElems
     disp(covMatrix);
     figure;
     plot(data(1,:), data(2,:), 'bo');
+    title(sprintf('%d. Dataset', i));
     axis equal;
 end
 
@@ -96,3 +96,5 @@ plot3DPCA(data3D', meanVec', eigenVec, eigenVal, 1, 1); %Plot data with reconstr
 %% 5 Shape Modell
 shapes = shapes{1};
 Bsp5(shapes);
+
+clear;
