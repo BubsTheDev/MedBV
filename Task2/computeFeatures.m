@@ -36,9 +36,11 @@ result(25:44,:) = haarlike; %haar like features (gradientenstärke)
 %result(5,:) = haarlike(1,:);
 
 % x Koordinaten d. pixels
+width = size(image,1);
+height = size(image,2);
 j=1;
-for i=1:size(image,1) 
-   result(45,j:j+143) = i; 
+for i=1:width 
+   result(45,j:j+height) = i; 
    j=j+143;
 end
 result = result(:,1:npix);
@@ -48,7 +50,7 @@ j=1;
 for i=1:npix
    result(46,i) = j;
    j = j+1;
-   if(j==144)
+   if(j==width+1)
        j=1;
    end
 end

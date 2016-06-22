@@ -11,8 +11,8 @@ shapes = data{1};
 %shapeModel(shapes);
 
 %% Task 2
-image = data{2}{1};
-features = computeFeatures(image);
+% image = data{2}{1};
+% features = computeFeatures(image);
 %features = cache(@computeFeatures,image);
 % figure;
 % imagesc(reshape(features(1,:),size(image,1),size(image,2)));
@@ -32,16 +32,20 @@ features = computeFeatures(image);
 % figure;
 % imagesc(reshape(features(25,:),size(image,1),size(image,2)));
 % title('Feature 6 Haar Like Gradientenstärke');
-%a figure;
+% figure;
 % imagesc(reshape(features(45,:),size(image,1),size(image,2)));
 % title('Feature 7 X Koordinaten');
-figure;
-imagesc(reshape(features(46,:),size(image',1),size(image',2)));
-title('Feature 8 Y Koordinaten');
+% figure;
+% imagesc(reshape(features(46,:),size(image,1),size(image,2)));
+% title('Feature 8 Y Koordinaten');
 
 %% Task 3
-% for i=1:30
-%     result = train(data{2}{i}, data{4}{i});
-% end
+for i=1:30
+    result = train(data{2}{i}, data{4}{i});
+    figure;
+    plot(result.OOBPermutedVarDeltaError);
+end
 
+%result = train(data{2}{1}, data{4}{1});
+ 
 clear;
