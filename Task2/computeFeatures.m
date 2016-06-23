@@ -39,9 +39,9 @@ result(25:44,:) = haarlike; %haar like features (gradientenstärke)
 width = size(image,1);
 height = size(image,2);
 j=1;
-for i=1:width 
-   result(45,j:j+height) = i; 
-   j=j+143;
+for i=1:height 
+   result(45,j:j+width) = i; 
+   j=j+width;
 end
 result = result(:,1:npix);
 
