@@ -6,6 +6,15 @@ data = struct2cell(load('handdata.mat'));
 % 3 .. landmarks
 % 4 .. masks
 
+%% Normalize Images and save masks
+images = cell(size(data{2}));
+for i = 1:length(images)
+    img = data{2}{i};
+    images{i} = im2double(img);
+end
+
+masks = data{4};
+
 %% Task 1
 shapes = data{1};
 %shapeModel(shapes);
@@ -40,12 +49,18 @@ shapes = data{1};
 % title('Feature 8 Y Koordinaten');
 
 %% Task 3
+% for i=1:30
+%     result = train(data{2}{i}, data{4}{i});
+%     figure;
+%     plot(result.OOBPermutedVarDeltaError);
+% end
+
 for i=1:30
-    result = train(data{2}{i}, data{4}{i});
+    result = train(images{i}, masks{i});
     figure;
     plot(result.OOBPermutedVarDeltaError);
 end
 
-%result = train(data{2}{1}, data{4}{1});
+%result = train(images{1}, masks{1});
  
 clear;
