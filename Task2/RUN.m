@@ -17,12 +17,12 @@ masks = data{4};
 
 %% Task 1
 shapes = data{1};
-%shapeModel(shapes);
+shapeModel(shapes);
 
 %% Task 2
-image = data{2}{1};
+image = images{1};
 features = computeFeatures(image);
-%features = cache(@computeFeatures,image);
+
 figure;
 imagesc(reshape(features(1,:),size(image,1),size(image,2)));
 title('Feature 1 Grauwerte');
@@ -49,18 +49,7 @@ imagesc(reshape(features(46,:),size(image,1),size(image,2)));
 title('Feature 8 Y Koordinaten');
 
 %% Task 3
-% for i=1:30
-%     result = train(data{2}{i}, data{4}{i});
-%     figure;
-%     plot(result.OOBPermutedVarDeltaError);
-% end
-
-% for i=1:30
-%     result = train(images{i}, masks{i});
-%     figure;
-%     plot(result.OOBPermutedVarDeltaError);
-% end
-
-%result = train(images{1}, masks{1});
- 
-clear;
+tBag = train(images, masks);
+error = oobError(tBag);
+fprintf('Out-Of-Bag Error: %2.5f %%\n', (error * 100));
+plot(tBag.OOBPermutedVarDeltaError);

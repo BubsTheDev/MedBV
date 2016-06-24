@@ -22,7 +22,7 @@ w = ones(length(x),1);
 res = [x y w];
 
 % S * R * T
-transformation = scale * rotation * translation
+transformation = scale * rotation * translation;
 
 res = transformation * res';
 result = zeros(length(res) * 2, 1);
